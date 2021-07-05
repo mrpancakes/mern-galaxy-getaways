@@ -11,6 +11,7 @@ const usersSchema = new Schema({
     password: { type: String, required: true },
     creditCard: { type: Number, required: true },
     street: { type: String, required: true },
+    city: { type: String, required: true },
     state: { type: String, required: true },
     zip: { type: Number, required: true },
 

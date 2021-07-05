@@ -1,18 +1,40 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Nav from "./components/Nav";
+import Home from "./pages/Home";
+import BookTrip from "./pages/BookTrip";
+import MyTrips from "./pages/MyTrips";
+import Confirmation from "./pages/Confirmation";
+import About from "./pages/About";
 
 function App() {
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
+    <Router>
+      <div>
+        <Nav />
+        <Switch>
+        <Route exact path={["/", "/home"]}>
+            <Home />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/my-trips">
+            <MyTrips />
+          </Route>
+          <Route exact path="/login">
+          </Route>
+          <Route exact path="/book-trip">
+            <BookTrip />
+          </Route>
+          <Route exact path="/confirmation">
+            <Confirmation />
+          </Route>
+          
+        </Switch>
       </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-    </div>
+    </Router>
   );
 }
 
