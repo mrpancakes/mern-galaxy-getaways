@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Galaxy Getaways</title>
+    <link rel="stylesheet" href="template-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-container">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 p-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../src/images/galaxy-logo.png" alt="Galaxy Getaways" class="img-responsive">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Trips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login / Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mb-5">
+
+        <h1 class="mb-5 text-center">My Trips</h1>
+
+
+        <section class="d-flex flex-wrap justify-content-around">
+
+            <!-- <form>
+                <h4 class="mb-4">Login</h4>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form> -->
+
+            <form class="container">
+                <h4 class="mb-4">Register</h4>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="email" class="form-control" id="firstName" aria-describedby="firstName">
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="email" class="form-control" id="lastName" aria-describedby="lastName">
+                    </div>
+                </div>
+                <div>
+                    <label for="street" class="form-label">Street Address</label>
+                    <input type="email" class="form-control" id="street" aria-describedby="street">
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="email" class="form-control" id="city" aria-describedby="city">
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <label for="state" class="form-label">State</label>
+                        <input type="email" class="form-control" id="state" aria-describedby="state" placeholder="two-letter abbrev." maxlength="2">
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <label for="zip" class="form-label">Zip</label>
+                        <input type="email" class="form-control" id="zip" aria-describedby="zip">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <label for="creditCard" class="form-label">Credit Card Number</label>
+                        <input type="email" class="form-control" id="creditCard" aria-describedby="creditCard">
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                </div>
+
+
+                <div>
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <img class="planet" id="jupiter" src="../src/images/jupiter.png" alt="jupiter">
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
