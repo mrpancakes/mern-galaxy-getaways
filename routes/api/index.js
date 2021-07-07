@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const bookRoutes = require("./books"); // change to the actual name of the local /api file
 
-// Update to actual name required in
-router.use("/books", bookRoutes);
+//Requiring the js page to the right root routes
+router.use("/user", require("./user.js"));
+router.use("/auth", require("./auth.js"));
 
 module.exports = router;
