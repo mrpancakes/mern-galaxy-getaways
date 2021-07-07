@@ -16,13 +16,13 @@ main {
   z-index: 10 !important;
   color: white;
   position: relative;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   width: 80%;
   /* margin: auto; */
 }
 
 header {
-  margin: 30px 0 80px 0;
+  margin: 30px 0 40px 0;
   z-index: 10;
   position: relative;
   text-align: center;
@@ -54,9 +54,26 @@ input:focus, textarea:focus, select:focus{
   outline: none;
 }
 
-.form-select {
-  background-color: transparent !important;
-  color: white !important;
+.about {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.login-form-link {
+  cursor: pointer;
+}
+
+.login-form {
+  width: 40%;
+}
+
+.register-form {
+  width: 60%;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.register-form > div {
+  padding: 10px 0;
 }
 
 .btn-dark {
@@ -276,6 +293,14 @@ footer {
 @media screen and (max-width: 769px) {
   form {
       justify-content: center;
+  }
+
+  .login-form, .register-form {
+    width: 90%;
+  }
+
+  .register-form > div > div {
+    padding-bottom: 20px;
   }
 
   .form-select {

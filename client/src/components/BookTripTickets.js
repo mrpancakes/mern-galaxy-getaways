@@ -9,31 +9,31 @@ const BookTripTickets = (props) => {
                 <form>
                     <div className="d-flex align-items-center">
                         <label for="spaceline" className="form-label">Spaceline: </label>
-                        <input type="text" readonly value="SpaceX" id="spaceline" />
+                        <input type="text" readOnly value="SpaceX" id="spaceline" />
                     </div>
                     <div className="d-flex align-items-center">
                         <label for="depart" className="form-label">Depart: </label>
-                        <input type="text" readonly value="12/01/2021" id="depart" />
+                        <input type="text" readOnly value="12/01/2021" id="depart" />
                     </div>
                     <div className="d-flex align-items-center">
                         <label for="return" className="form-label">Return: </label>
-                        <input type="text" readonly value="12/29/2021" id="return" />
+                        <input type="text" readOnly value="12/29/2021" id="return" />
                     </div>
                     <div className="d-flex align-items-center">
                         <label for="section" className="form-label">Section: </label>
-                        <input type="text" readonly value={props.seat} id="section" />
+                        <input type="text" readOnly value={props.seat} id="section" />
                     </div>
                     <div className="d-flex align-items-center">
-                        <label for="quantity" className="form-label">Quantity: </label>
-                        <input type="text" readonly value="4" id="quantity" />
+                        <label for="passengers" className="form-label">Passengers: </label>
+                        <input type="text" readOnly value="4" id="passengers" />
                     </div>
                     <div className="d-flex align-items-center">
                         <label for="pricePerTicket" className="form-label">Price/ticket: </label>
-                        <input type="text" readonly value="$3,000" id="pricePerTicket" />
+                        <input type="text" readOnly value="$3,000" id="pricePerTicket" />
                     </div>
                     <div className="d-flex align-items-center total-price">
                         <label for="total" className="form-label">Total: </label>
-                        <input type="text" readonly value="$12,000" id="total" />
+                        <input type="text" readOnly value="$12,000" id="total" />
                     </div>
                     <div className="d-flex justify-content-end">
                         <button className="btn btn-success m-auto">Instant Purchase</button>

@@ -1,0 +1,60 @@
+
+label {
+  font-size: 1.2rem;
+}
+
+.react-date-picker__inputGroup {
+  padding-left: 10px !important;
+}
+
+.form-select {
+  background-color: white !important;
+  color: black !important;
+}
+
+.search-flights-btn {
+    margin-top: 15px;
+  }
+
+.react-date-picker__inputGroup__input,
+.react-date-picker__inputGroup__divider {
+  font-size: 1.1rem !important;
+}
+
+.react-calendar__month-view__weekdays {
+  color: black;
+  font-size: 0.7rem !important;
+}
+  
+.react-date-picker {
+    display: flex !important;
+    font-size: 1.5rem !important;
+  }
+  
+.react-date-picker__button,
+.react-date-picker__inputGroup
+   {
+    background-color: white !important;
+  }
+  
+.react-date-picker__inputGroup {
+    border-radius: 3px 0 0 3px;
+  }
+
+.react-date-picker__calendar-button {
+    border-radius: 0 3px 3px 0;
+  }
+
+  
+.react-date-picker__inputGroup__divider {
+    color: black !important;
+    
+  }
+
+.react-date-picker__wrapper {
+    border-radius: 10px !important;
+  }
+
+.react-date-picker__button__icon {
+    color: yellow !important;
+  }

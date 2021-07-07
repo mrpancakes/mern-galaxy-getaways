@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeForm from '../components/HomeForm'
+import HomeForm from '../components/HomeForm/HomeForm'
 import marsImg from '../images/marsglobe.png'
 
 const Home = () => {
