@@ -7,6 +7,7 @@ import BookTrip from "./pages/BookTrip";
 import MyTrips from "./pages/MyTrips";
 import Confirmation from "./pages/Confirmation";
 import About from "./pages/About";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <MyTrips />
           </Route>
           <Route exact path="/login">
+            <Login />
           </Route>
           <Route exact path="/book-trip">
             <BookTrip />

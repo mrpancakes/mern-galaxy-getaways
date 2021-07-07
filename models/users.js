@@ -20,10 +20,8 @@ const usersSchema = new Schema({
         ref: "Trips"
     },
     ]
-
-
 });
 
-const users = mongoose.model("Users", usersSchema);
+const Users = mongoose.model("Users", usersSchema);
 
 module.exports = Users;

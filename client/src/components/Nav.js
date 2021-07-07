@@ -4,7 +4,7 @@ import logo from '../images/galaxy-logo.png'
 
 const Nav = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark mt-3 mb-5 p-3">
+        <nav className="navbar navbar-expand-lg navbar-dark mt-3 mb-3 p-3">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
                     <img src={logo} alt="Galaxy Getaways" />
