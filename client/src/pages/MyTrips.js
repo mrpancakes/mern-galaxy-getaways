@@ -7,7 +7,11 @@ const MyTrips = () => {
         <>
             <main className="container mb-5">
 
-                <h1 className="mb-5 text-center">My Trips</h1>
+            <header>
+                <h1 className="mb-3">My Trips</h1>
+                <h6>All flights depart at 5:00pm local time at the launch center in Cape Canaveral, Florida.</h6>
+
+                </header>
 
 
                 <section className="d-flex flex-wrap justify-content-around">

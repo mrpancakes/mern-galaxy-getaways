@@ -5,6 +5,9 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@material-ui/core": "^4.12.1",
+    "@material-ui/pickers": "^3.3.10",
+    "@material-ui/styles": "^4.11.4",
     "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-date-picker": "^8.2.0",
