@@ -34,7 +34,7 @@ const HomeForm = () => {
                     <div className="col-12 col-lg-3">
                     <label class="form-label">Departure</label><br />
                         <DatePicker
-                            dateFormat="yyyy/MM/dd"
+                            
                             onChange={setDepartDate}
                             value={departDate}
                         />
@@ -45,6 +45,7 @@ const HomeForm = () => {
                         <DatePicker
                             onChange={setReturnDate}
                             value={returnDate}
+                            calendarStartDay={0}
                         />
                     </div>
 

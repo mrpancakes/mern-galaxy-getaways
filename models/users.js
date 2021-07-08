@@ -16,7 +16,7 @@ const usersSchema = new Schema({
     zip: { type: Number, required: true },
 
     trips: [{
-        type: Schema.Types.Objectid,
+        type: mongoose.ObjectId,
         ref: "Trips"
     },
     ]
