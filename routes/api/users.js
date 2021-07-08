@@ -9,42 +9,33 @@ const {
     validationResult
 } = require('express-validator');
 
-// A function for checking the headers of a request for a token
-const auth = require('../../middleware/auth');
 // Reference to the User schema
-const Users = require('../../models/Users');
+const User = require('../../models/User');
 
-// @route   GET api/auth
-// @desc    Authentication check route
+// @route   POST api/users
+// @desc    Register user to database
 // @access  Public
-
-// The auth function is called to check the user token to set the req.user value
-router.get('/', auth, async (req, res) => {
-    try {
-        // Searching for a user by the value from the token and getting all info EXCEPT the password
-        const users = await Users.findById(req.users.id).select('-password');
-        res.json(users);
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
-// @route   POST api/auth
-// @desc    Authenticate user login
-// @access  Public
-router.post('/', 
+router.post('/',
     // Passing an array to express-validator to check the req.body for validations
     // https://express-validator.github.io/docs/
     [
-        // Checking req.body for a email property and setting a message to respond with if there isnt one
+        // Checking req.body for a name property and setting a message to respond with if there isnt one
+        check('firstName', 'Name is required')
+            .not()
+            .isEmpty(),
+        check('lastName', 'Name is required')
+            .not()
+            .isEmpty(),
         check('email', 'Please include a valid email')
             .isEmail(),
-        check('password', 'Password is required')
-            .exists(),
-        check('creditCard','Credit Card is required')
-            .exists()
-        
+        check('password', 'Please enter a password with 6 or more characters')
+            .isLength({
+                min: 6
+            }),
+        check('creditCard', 'Please enter a valid credit card number')
+            .isLength(
+                16),
+
     ],
     // Setting async for proper asynchronus requests
     async (req, res) => {
@@ -58,8 +49,16 @@ router.post('/',
         }
         // Since there was no error, destruture req.body for the values needed for the user
         const {
+            firstName,
+            lastName,
             email,
-            password
+            password,
+            creditCard,
+            street,
+            city,
+            state,
+            zip,
+
         } = req.body;
         // Setting the try block for the await sections
         try {
@@ -67,26 +66,36 @@ router.post('/',
             let users = await Users.findOne({
                 email
             })
-            // If there is no existing user then error as the credentials are invalid
-            if (!user) {
+            // If there is a match for the email respond with an error
+            if (users) {
                 return res.status(400).json({
                     errors: [{
-                        msg: 'Invalid Credentials'
+                        msg: 'User already exists'
                     }]
                 });
             }
-            // Checking the stored encrypted password with the password provided (Returns a boolean)
+            // If no existing user create one from the schema
+            users = new Users({
+                firstName,
+                lastName,
+                email,
+                password,
+                creditCard,
+                street,
+                city,
+                state,
+                zip,
+
+            });
+            // Generate the salt for the password encryption
             // https://www.npmjs.com/package/express-validator
-            const isMatch = await bcrypt.compare(password, users.password);
-            // If isMatch is false error out as the password is incorrect
-            if (!isMatch) {
-                return res.status(400).json({
-                    errors: [{
-                        msg: 'Invalid Credentials'
-                    }]
-                });
-            }
-        
+            const salt = await bcrypt.genSalt(13);
+            // Change the created users password to an encryped value
+            users.password = await bcrypt.hash(password, salt);
+            //also for credit card
+            users.creditCard = await bcrypt.hash(creditCard, salt);
+            // Save the user with the updated encryped password and cc
+            await users.save();
             // Create a value to respond to the front end with
             const payload = {
                 users: {
@@ -98,7 +107,7 @@ router.post('/',
                 // Passing the value to encrypt
                 payload,
                 // Getting the encryption secret
-                process.env.jwtSecret, 
+                process.env.jwtSecret,
                 // Setting a length of time in milliseconds for the token to last for before requiring relogin
                 {
                     expiresIn: 360000
@@ -117,6 +126,5 @@ router.post('/',
         }
 
     });
-
 
 module.exports = router;
