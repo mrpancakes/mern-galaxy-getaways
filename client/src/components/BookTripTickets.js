@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment';
-
+import NumberFormat from 'react-number-format';
 
 const BookTripTickets = (props) => {
 
@@ -36,11 +36,11 @@ const BookTripTickets = (props) => {
                     </div>
                     <div className="d-flex align-items-center">
                         <label for="pricePerTicket" className="form-label">Price/ticket: </label>
-                        <input type="text" readOnly value={props.ticketPrice} id="pricePerTicket" />
+                        <NumberFormat readOnly value={props.ticketPrice} thousandSeparator={true} prefix={'$'} />
                     </div>
                     <div className="d-flex align-items-center total-price">
                         <label for="total" className="form-label">Total: </label>
-                        <input type="text" readOnly value={props.tripInfo ? passengers*props.ticketPrice : 'Calculating...'} id="total" />
+                        <NumberFormat readOnly value={props.tripInfo ? passengers*props.ticketPrice : 'Calculating...'} thousandSeparator={true} prefix={'$'} />
                     </div>
                     <div className="d-flex justify-content-end">
                         <button className="btn btn-success m-auto">Instant Purchase</button>

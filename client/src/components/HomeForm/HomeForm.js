@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, } from 'react'
+import React, { useState, useContext, } from 'react'
 import { useHistory } from "react-router-dom";
 import './style.css'
 import DatePicker from 'react-date-picker'
@@ -59,7 +59,7 @@ const HomeForm = (props) => {
                     <div className="col-12 col-lg-3">
                     <label class="form-label">Departure</label><br />
                         <DatePicker
-                            
+                            locale="en-US"
                             onChange={setDepartDate}
                             value={departDate}
                         />
@@ -68,9 +68,9 @@ const HomeForm = (props) => {
                     <div className="col-12 col-lg-3">
                     <label class="form-label">Return</label><br />
                         <DatePicker
+                            locale="en-US"
                             onChange={setReturnDate}
                             value={returnDate}
-                            calendarStartDay={0}
                         />
                     </div>
 
