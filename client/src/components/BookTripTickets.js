@@ -25,15 +25,15 @@ const BookTripTickets = (props) => {
                     </div>
                     <div className="d-flex align-items-center">
                         <label for="passengers" className="form-label">Passengers: </label>
-                        <input type="text" readOnly value="4" id="passengers" />
+                        <input type="text" readOnly value={props.passengers} id="passengers" />
                     </div>
                     <div className="d-flex align-items-center">
                         <label for="pricePerTicket" className="form-label">Price/ticket: </label>
-                        <input type="text" readOnly value="$3,000" id="pricePerTicket" />
+                        <input type="text" readOnly value={props.ticketPrice} id="pricePerTicket" />
                     </div>
                     <div className="d-flex align-items-center total-price">
                         <label for="total" className="form-label">Total: </label>
-                        <input type="text" readOnly value="$12,000" id="total" />
+                        <input type="text" readOnly value={props.ticketPrice*props.passengers} id="total" />
                     </div>
                     <div className="d-flex justify-content-end">
                         <button className="btn btn-success m-auto">Instant Purchase</button>

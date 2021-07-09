@@ -55,6 +55,7 @@ const seedTrips = [
         total: 12000,
     },
 ];
+
 // Insert users
 
 db.Trips
