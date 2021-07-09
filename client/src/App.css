@@ -66,9 +66,13 @@ input:focus, textarea:focus, select:focus{
   width: 40%;
 }
 
+.MuiButton-root:hover {
+  border: 2px solid #943F72 !important;
+}
+
 .register-form {
   width: 60%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(152, 152, 152, 0.6);
   border-radius: 10px;
 }
 
@@ -128,8 +132,9 @@ footer {
 }
 
 .search-flights-btn {
-  display: flex;
-  justify-content: flex-end;
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin-top: 15px !important;
 }
 
 .ticket {
