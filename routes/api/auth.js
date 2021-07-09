@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Destructuring out the functions from express-validator
@@ -12,7 +12,7 @@ const {
 // A function for checking the headers of a request for a token
 const auth = require('../../middleware/auth');
 // Reference to the User schema
-const Users = require('../../models/Users');
+const Users = require('../../models/users');
 
 // @route   GET api/auth
 // @desc    Authentication check route

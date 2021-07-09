@@ -1,7 +1,34 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Trips = require('../../models/trips')
+
+// POST: Create new trip from http://localhost:3000/book-trip
+// GET: All of a users trips on http://localhost:3000/my-trips
+// DELETE: Removing a user's trips when the click the cancel button on http://localhost:3000/my-trips
+
+router.post('/book-trip', async (req, res) => {
+    //console.log(req.body)
+
+    try {
+        const postTrip = await Trips.create(req.body)
+        res.send(postTrip)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+
+router.get('/my-trips', async (req, res) => {
+    try {
+    const myTrips = await Trips.find(req.body)
+    res.send(myTrips)  
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 
 // Destructuring out the functions from express-validator
 const {
@@ -10,31 +37,37 @@ const {
 } = require('express-validator');
 
 // Reference to the User schema
-const User = require('../../models/User');
+//const User = require('../../models/users');
+const {
+    response
+} = require('express');
 
 // @route   POST api/users
 // @desc    Register user to database
 // @access  Public
+
+
+
 router.post('/',
     // Passing an array to express-validator to check the req.body for validations
     // https://express-validator.github.io/docs/
     [
         // Checking req.body for a name property and setting a message to respond with if there isnt one
         check('firstName', 'Name is required')
-            .not()
-            .isEmpty(),
+        .not()
+        .isEmpty(),
         check('lastName', 'Name is required')
-            .not()
-            .isEmpty(),
+        .not()
+        .isEmpty(),
         check('email', 'Please include a valid email')
-            .isEmail(),
+        .isEmail(),
         check('password', 'Please enter a password with 6 or more characters')
-            .isLength({
-                min: 6
-            }),
+        .isLength({
+            min: 6
+        }),
         check('creditCard', 'Please enter a valid credit card number')
-            .isLength(
-                16),
+        .isLength(
+            16),
 
     ],
     // Setting async for proper asynchronus requests
