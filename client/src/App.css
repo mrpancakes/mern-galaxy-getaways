@@ -72,7 +72,7 @@ input:focus, textarea:focus, select:focus{
 
 .register-form {
   width: 60%;
-  background: rgba(152, 152, 152, 0.6);
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
 
@@ -132,9 +132,8 @@ footer {
 }
 
 .search-flights-btn {
-  display: flex !important;
-  justify-content: flex-end !important;
-  margin-top: 15px !important;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .ticket {
