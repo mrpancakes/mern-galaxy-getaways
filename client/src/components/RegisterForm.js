@@ -1,4 +1,5 @@
 import React from 'react'
+import NumberFormat from 'react-number-format';
 
 const RegisterForm = () => {
     return (
@@ -33,11 +34,13 @@ const RegisterForm = () => {
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row d-flex align-items-center">
                     <div class="col-12 col-lg-6">
                         <label for="creditCard" class="form-label">Credit Card Number</label>
-                        <input type="number" class="form-control" id="creditCard" aria-describedby="creditCard"/>
+                        {/* <input type="number" class="form-control" id="creditCard" aria-describedby="creditCard"/> */}
+                        <NumberFormat className="creditcard" format="#### #### #### ####" mask="_"/>
                     </div>
+                    
                     <div class="col-12 col-lg-6">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>

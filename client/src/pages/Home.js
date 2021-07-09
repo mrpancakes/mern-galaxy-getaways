@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles'
 import HomeForm from '../components/HomeForm/HomeForm'
 import marsImg from '../images/marsglobe.png'
-import { withTheme } from '@material-ui/styles';
 
 const Home = () => {
 
