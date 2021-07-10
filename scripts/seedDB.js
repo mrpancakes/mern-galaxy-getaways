@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-
 mongoose.connect(
-    process.env.MONGODB_URI ||
-    "mongodb://localhost/galaxyGetaways"
+    process.env.MONGODB_URI || "mongodb://localhost/galaxyGetaways"
 );
 // Define array of users
 const seedUsers = [
@@ -16,7 +14,8 @@ const seedUsers = [
         street: "123 Test Street",
         city: "Dallas",
         state: "TX",
-        zip: "75006"
+        zip: "75006",
+        trips: [],
     },
     {
         firstName: "Sally",
@@ -27,11 +26,10 @@ const seedUsers = [
         street: "321 Fun Dr.",
         city: "Fargo",
         state: "ND",
-        zip: "84029"
+        zip: "84029",
+        trips: [],
     },
-
 ];
-
 // Define trips
 const seedTrips = [
     {
@@ -55,33 +53,40 @@ const seedTrips = [
         total: 12000,
     },
 ];
-
 // Insert users
-
-db.Trips
-    .remove({})
+db.Trips.remove({})
     .then(() => db.Trips.collection.insertMany(seedTrips))
-    .then(data => {
+    .then((data) => {
         console.log(data.result.n + " trips inserted");
         console.log(data);
         let userData;
-        db.Users
-            .remove({})
+        db.Users.remove({})
             .then(() => db.Users.collection.insertMany(seedUsers))
-            .then(data2 => {
+            .then((data2) => {
                 console.log(data2.result.n + " users inserted");
                 console.log(data2);
                 userData = data2;
             })
-
             .then(() => {
-                db.Users.findOneAndUpdate({ _id: userData.insertedIds["0"] }, { $push: { trips: {$each: data.ops }}}, { new: true })
-            })     
+                console.log(userData.insertedIds["0"])
+                db.Users.findOneAndUpdate(
+                    { _id: userData.insertedIds["0"] },
+                    { $push: { trips: { $each: data.ops } } },
+                    { new: true }
+                ).then((res) => {
+                    console.log('a', res);
+                })
+                db.Users.findOneAndUpdate(
+                    { _id: userData.insertedIds["1"] },
+                    { $push: { trips: { $each: data.ops } } },
+                    { new: true }
+                ).then((res) => {
+                    console.log('a', res);
+                })
+            })
+
+            .catch(err => {
+                console.error(err);
+                process.exit(1);
+            });
     });
-
-
-
-//     .catch(err => {
-//         console.error(err);
-//         process.exit(1);
-//     });
