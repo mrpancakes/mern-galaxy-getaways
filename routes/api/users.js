@@ -2,11 +2,47 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Trips = require('../../models/trips')
+const Trips = require('../../models/trips');
+const Users = require('../../models/users')
 
 // POST: Create new trip from http://localhost:3000/book-trip
 // GET: All of a users trips on http://localhost:3000/my-trips
 // DELETE: Removing a user's trips when the click the cancel button on http://localhost:3000/my-trips
+
+router.post('/sign-up', async (req, res) => {
+    console.log(req.body)
+
+    try {
+      const createUser = await Users.create(req.body)
+
+      jwt.sign({
+        data: {
+            userEmail: createUser.email,
+            userId: createUser._id,
+        }
+    },
+
+    "SSEMNG$51423",
+
+    {
+        expiresIn: 360000
+    },
+
+    (err, token) => {
+        if (err) throw err;
+        res.json({
+            token
+        });
+    }
+
+)
+
+    } catch (error) {
+        res.send(error)
+        
+    }
+})
+
 
 router.post('/book-trip', async (req, res) => {
     //console.log(req.body)
@@ -19,7 +55,6 @@ router.post('/book-trip', async (req, res) => {
     }
 })
 
-
 router.get('/my-trips', async (req, res) => {
     try {
     const myTrips = await Trips.find(req.body)
@@ -30,134 +65,7 @@ router.get('/my-trips', async (req, res) => {
 })
 
 
-// Destructuring out the functions from express-validator
-const {
-    check,
-    validationResult
-} = require('express-validator');
-
-// Reference to the User schema
-//const User = require('../../models/users');
-const {
-    response
-} = require('express');
-
-// @route   POST api/users
-// @desc    Register user to database
-// @access  Public
 
 
-
-router.post('/',
-    // Passing an array to express-validator to check the req.body for validations
-    // https://express-validator.github.io/docs/
-    [
-        // Checking req.body for a name property and setting a message to respond with if there isnt one
-        check('firstName', 'Name is required')
-        .not()
-        .isEmpty(),
-        check('lastName', 'Name is required')
-        .not()
-        .isEmpty(),
-        check('email', 'Please include a valid email')
-        .isEmail(),
-        check('password', 'Please enter a password with 6 or more characters')
-        .isLength({
-            min: 6
-        }),
-        check('creditCard', 'Please enter a valid credit card number')
-        .isLength(
-            16),
-
-    ],
-    // Setting async for proper asynchronus requests
-    async (req, res) => {
-        // Checking the result of the express-validator
-        const errors = validationResult(req);
-        // If there is an error, respond with it
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array()
-            });
-        }
-        // Since there was no error, destruture req.body for the values needed for the user
-        const {
-            firstName,
-            lastName,
-            email,
-            password,
-            creditCard,
-            street,
-            city,
-            state,
-            zip,
-
-        } = req.body;
-        // Setting the try block for the await sections
-        try {
-            // Checking the database for an existing matching email
-            let users = await Users.findOne({
-                email
-            })
-            // If there is a match for the email respond with an error
-            if (users) {
-                return res.status(400).json({
-                    errors: [{
-                        msg: 'User already exists'
-                    }]
-                });
-            }
-            // If no existing user create one from the schema
-            users = new Users({
-                firstName,
-                lastName,
-                email,
-                password,
-                creditCard,
-                street,
-                city,
-                state,
-                zip,
-
-            });
-            // Generate the salt for the password encryption
-            // https://www.npmjs.com/package/express-validator
-            const salt = await bcrypt.genSalt(13);
-            // Change the created users password to an encryped value
-            users.password = await bcrypt.hash(password, salt);
-            //also for credit card
-            users.creditCard = await bcrypt.hash(creditCard, salt);
-            // Save the user with the updated encryped password and cc
-            await users.save();
-            // Create a value to respond to the front end with
-            const payload = {
-                users: {
-                    id: users.id
-                }
-            }
-            // Creating a token to validate legitimate users without constantly checking the database
-            jwt.sign(
-                // Passing the value to encrypt
-                payload,
-                // Getting the encryption secret
-                process.env.jwtSecret,
-                // Setting a length of time in milliseconds for the token to last for before requiring relogin
-                {
-                    expiresIn: 360000
-                },
-                // Checking for errors then responding to the front end with the token for it to store.
-                (err, token) => {
-                    if (err) throw err;
-                    res.json({
-                        token
-                    });
-                }
-            );
-        } catch (err) {
-            // If any errors during the try that isn't accounted for get sent as a 500 Bad request
-            res.status(500).send('Server Error');
-        }
-
-    });
 
 module.exports = router;
