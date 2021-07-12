@@ -1,7 +1,21 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
+
+  // Registers a user to the database
+  createUser: function(userData) {
+    return axios.post("api/users/sign-up", userData);
+  },
+
+  // Logs in a user
+  loginUser: function(loginData) {
+    return axios.post("/api/auth/login", loginData);
+  }
+
+
+
+
+    // Gets all books
 //   getBooks: function() {
 //     return axios.get("/api/books");
 //   },
@@ -14,8 +28,5 @@ export default {
 //     return axios.delete("/api/books/" + id);
 //   },
 
-  // Saves a book to the database
-  createUser: function(userData) {
-    return axios.post("api/users/sign-up", userData);
-  }
+
 };

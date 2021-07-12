@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from "react-router-dom";
+import TripContext from '../utils/TripContext'
 
 import logo from '../images/galaxy-logo.png'
 
 const Nav = () => {
+
+    let history = useHistory();
+
+    const { token, setToken } = useContext(TripContext);
+
+    useEffect(() => {
+        setToken(localStorage.getItem('userToken'));
+    }, [])
+
+    const handleLogout = () => {
+        localStorage.removeItem('userToken');
+        history.go(0);
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark mt-3 mb-3 p-3">
             <div className="container-fluid">
@@ -21,9 +37,15 @@ const Nav = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="/my-trips">My Trips</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/login">Login / Logout</a>
-                        </li>
+                        {token ?
+                            <li className="nav-item">
+                                <a className="nav-link" id="logout" onClick={handleLogout}>Logout</a>
+                            </li>
+                            :
+                            <li className="nav-item">
+                                <a className="nav-link" href="/login">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
