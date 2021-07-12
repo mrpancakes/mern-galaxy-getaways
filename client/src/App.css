@@ -206,6 +206,10 @@ footer {
   margin-left: -15px !important;
 }
 
+#logout {
+  cursor: pointer;
+}
+
 #pink {
   background-color: #943F72;
 }

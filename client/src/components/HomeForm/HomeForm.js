@@ -25,18 +25,10 @@ const HomeForm = (props) => {
         history.push('/book-trip')
     }
 
-    const [destination, setDestination] = useState('')
+    const [destination, setDestination] = useState('');
     const [departDate, setDepartDate] = useState(new Date());
     const [returnDate, setReturnDate] = useState(new Date());
-    const [passengers, setPassengers] = useState(0)
-
-
-
-
-    // useEffect(() => {
-    //     console.log(departDate);
-    //     console.log(returnDate);
-    // })
+    const [passengers, setPassengers] = useState(0);
 
     return (
         <>

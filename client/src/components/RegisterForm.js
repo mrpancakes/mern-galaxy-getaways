@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
+import { useHistory } from "react-router-dom";
 import API from '../utils/API'
 
 const RegisterForm = () => {
+
+    let history = useHistory();
 
     const [userInfo, setUserInfo] = useState({})
 
@@ -12,19 +15,25 @@ const RegisterForm = () => {
         // console.log(userInfo)
     }
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        API.createUser({
-            firstName: userInfo.firstName,
-            lastName: userInfo.lastName,
-            street: userInfo.street,
-            city: userInfo.city,
-            state: userInfo.state,
-            zip: userInfo.zip,
-            creditCard: userInfo.creditCard,
-            email: userInfo.email,
-            password: userInfo.password,
-        })
+        try {
+            const data = await API.createUser({
+                firstName: userInfo.firstName,
+                lastName: userInfo.lastName,
+                street: userInfo.street,
+                city: userInfo.city,
+                state: userInfo.state,
+                zip: userInfo.zip,
+                creditCard: userInfo.creditCard,
+                email: userInfo.email,
+                password: userInfo.password,
+            })
+            history.go(0)
+            console.log(data);
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (

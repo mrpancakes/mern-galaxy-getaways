@@ -32,7 +32,7 @@ router.get('/', auth, async (req, res) => {
 // https://express-validator.github.io/docs/
 
 router.post('/login', async (req, res) => {
-    console.log("login2", req.body)
+    console.log("login body:", req.body)
     try {
         const login = await Users.find({
             email: req.body.email,
@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
             // const isMatch = await bcrypt.compare(req.body.password, login.password);
             // If isMatch is false error out as the password is incorrect
             if (!isMatch) {
-                console.log('loser')
+                console.log('req body password and the log password dont match')
                 return res.status(400).json({
                     errors: [{
                         msg: 'Invalid Password'
@@ -82,22 +82,6 @@ router.post('/login', async (req, res) => {
             );
             console.log(retToken);
             res.json({token: retToken}) 
-            // jwt.sign({
-            //     data: {
-            //         email: login.email,
-            //         id: login._id,
-            //     }
-            // },
-            // "SSEMNG$51423",
-            // {
-            //     expiresIn: 360000
-            // },
-            // (err, token) => {
-            //     if (err) throw err;
-            //     res.json({
-            //         token
-            //     });
-            // }
         }
     }
     catch (error) {

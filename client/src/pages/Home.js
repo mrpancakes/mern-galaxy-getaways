@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles'
 import HomeForm from '../components/HomeForm/HomeForm'
@@ -24,14 +24,28 @@ const Home = () => {
 
     // Need state and conditionals to show/hide form if user is logged in
 
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+      setToken(localStorage.getItem('userToken'));
+    },[])
+
+    console.log(token);
+
     return (
         <>
             <main className="container">
                 <h1>Where is your next adventure?</h1>
-
+                {!token ? 
+                <>
                 <h5 className="mb-5">Must be logged in to book a trip</h5>
                 <StyledButton href="/login">Login/Signup</StyledButton>
+                </>
+                :
+                <>
                 <HomeForm />
+                </>
+                }
             </main>
 
             <footer>
