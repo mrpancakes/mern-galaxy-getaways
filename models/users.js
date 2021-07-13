@@ -16,10 +16,10 @@ const usersSchema = new Schema({
     zip: { type: Number, required: true },
 
     trips: [{
-        type: mongoose.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Trips"
-    },
-    ]
+    }],
+    
 });
 
 const Users = mongoose.model("Users", usersSchema);

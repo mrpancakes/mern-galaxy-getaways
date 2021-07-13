@@ -11,6 +11,7 @@ module.exports = function (req, res, next) {
     try {
         // Decoding the existing token using JsonWebToken
         const decoded = jwt.verify(token, "SSEMNG$51423");
+        
         // Setting the user values as part of the request so its accessable from the data
         req.user = decoded.user;
         next();
