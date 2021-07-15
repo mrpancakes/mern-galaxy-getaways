@@ -12,7 +12,7 @@ const Nav = () => {
 
     useEffect(() => {
         setToken(localStorage.getItem('userToken'));
-    }, [])
+    })
 
     const handleLogout = () => {
         localStorage.removeItem('userToken');

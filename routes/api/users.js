@@ -15,14 +15,14 @@ router.post('/sign-up', async (req, res) => {
     try {
         const createUser = await Users.create(req.body)
         jwt.sign({
-                user: {
-                    email: createUser.email,
-                    _id: createUser._id,
-                }
-            },
+            user: {
+                email: createUser.email,
+                _id: createUser._id,
+            }
+        },
             "SSEMNG$51423", {
-                expiresIn: 360000
-            },
+            expiresIn: 360000
+        },
             (err, token) => {
                 if (err) throw err;
                 res.json({
@@ -56,24 +56,44 @@ router.post('/book-trip', auth, async (req, res) => {
     } catch (error) {
         res.send(error)
     }
-})
+});
+
 router.get('/my-trips', auth, async (req, res) => {
     try {
         const updatedUser = await Users.findOne({
             _id: req.user._id
         }).select("-creditCard -password").populate("trips")
-
         res.send(updatedUser)
     } catch (error) {
         res.send(error)
     }
-})
-router.delete('/my-trips', auth, async (req, res) => {
+});
+
+router.delete('/my-trips/:id', auth, async (req, res) => {
     try {
-        const deleteTrips = await Trips.deleteOne(req.body)
-        res.send(deleteTrips)
+        const foundUser = await Users.findOne({
+            _id: req.user._id
+        })
+        console.log(req.params.id)
+        console.log(req.user)
+        console.log(foundUser);
+        if (!foundUser) {
+            return res.status(400).json({
+                msg: 'trip not found'
+            });
+        } else {
+            await Users.updateOne(
+                { _id: req.user._id },
+                { $pull: { trips: req.params.id } }
+            );
+            const updatedUser = await Users.findOne({
+                _id: req.user._id
+            }).select("-creditCard -password").populate("trips")
+            res.send(updatedUser)
+        }
     } catch (error) {
-        res.send(error)
+        console.log(error);
+        res.send(error);
     }
 });
 module.exports = router;

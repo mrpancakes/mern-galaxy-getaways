@@ -12,21 +12,21 @@ const HomeForm = (props) => {
 
     const updateTripValues = (e) => {
         e.preventDefault();
-        console.log(departDate);
+        console.log(departureDate);
         console.log(returnDate);
         console.log(destination);
         console.log(passengers);
         setTripInfo({
             destination,
-            returnDate,
-            departDate,
+            returnDate: returnDate.toISOString(),
+            departureDate: departureDate.toISOString(),
             passengers
         })
         history.push('/book-trip')
     }
 
     const [destination, setDestination] = useState('');
-    const [departDate, setDepartDate] = useState(new Date());
+    const [departureDate, setDepartureDate] = useState(new Date());
     const [returnDate, setReturnDate] = useState(new Date());
     const [passengers, setPassengers] = useState(0);
 
@@ -52,8 +52,8 @@ const HomeForm = (props) => {
                     <label class="form-label">Departure</label><br />
                         <DatePicker
                             locale="en-US"
-                            onChange={setDepartDate}
-                            value={departDate}
+                            onChange={setDepartureDate}
+                            value={departureDate}
                         />
                     </div>
 
