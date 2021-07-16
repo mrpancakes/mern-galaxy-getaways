@@ -8,8 +8,6 @@ const BookTrip = () => {
 
     const { tripInfo } = useContext(TripContext);
 
-    console.log(tripInfo)
-
     return (
         <>
             <main className="container mb-5">

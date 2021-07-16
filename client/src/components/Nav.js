@@ -8,10 +8,12 @@ const Nav = () => {
 
     let history = useHistory();
 
-    const { token, setToken } = useContext(TripContext);
+    // const { token, setToken } = useContext(TripContext);
+
+    const [userToken, setUserToken] = useState(null);
 
     useEffect(() => {
-        setToken(localStorage.getItem('userToken'));
+        setUserToken(localStorage.getItem('userToken'));
     })
 
     const handleLogout = () => {
@@ -37,7 +39,7 @@ const Nav = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="/my-trips">My Trips</a>
                         </li>
-                        {token ?
+                        {userToken ?
                             <li className="nav-item">
                                 <a className="nav-link" id="logout" onClick={handleLogout}>Logout</a>
                             </li>
