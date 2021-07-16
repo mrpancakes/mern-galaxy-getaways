@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Trips = require('../../models/trips');
 const Users = require('../../models/users')
@@ -23,6 +23,8 @@ router.post('/sign-up', async (req, res) => {
             "SSEMNG$51423", {
             expiresIn: 360000
         },
+
+    
             (err, token) => {
                 if (err) throw err;
                 res.json({
@@ -30,6 +32,12 @@ router.post('/sign-up', async (req, res) => {
                 });
             }
         )
+        const salt = await bcrypt.genSalt(13);
+        user.password = await bcrypt.hash(password, salt);
+        await user.save();
+
+        
+
     } catch (error) {
         res.send(error)
     }

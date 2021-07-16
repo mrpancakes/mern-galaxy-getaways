@@ -1,10 +1,18 @@
 import axios from "axios";
+import bcrypt from 'bcryptjs';
+
+import { Users } from "../../../models";
+
+const salt = bcrypt.genSalt(13);
 
 export default {
 
   // Registers a user to the database
   createUser: function(userData) {
     return axios.post("api/users/sign-up", userData);
+    user.password = await bcrypt.hash(password, salt);
+    
+   
   },
 
   // Logs in a user
