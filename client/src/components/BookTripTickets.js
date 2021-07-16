@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { useHistory } from "react-router-dom";
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import TripContext from "../utils/TripContext"
@@ -6,12 +7,20 @@ import API from '../utils/API'
 
 const BookTripTickets = (props) => {
 
+    const history = useHistory();
+
+    const [clickedBook, setClickedBook] = useState(false)
+
     const { tripInfo, setTripInfo } = useContext(TripContext);
 
     const passengerCount = props.tripInfo.passengers
     const formattedDepartDate = moment(props.tripInfo.departDate).format('MM/DD/YYYY');
     const formattedReturnDate = moment(props.tripInfo.returnDate).format('MM/DD/YYYY');
     const totalPrice = props.ticketPrice * passengerCount;
+
+    const showConfirmBtn = () => {
+        setClickedBook(true);
+    }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -26,14 +35,16 @@ const BookTripTickets = (props) => {
                 total: totalPrice,
             });
             console.log(data);
+            history.push('/confirmation')
+
         } catch (err) {
             console.log(err);
         }
     }
 
     return (
-        <div>
-            <div className="ticket">
+        <div className="mb-5">
+            <div className="ticket mb-5">
                 <div className="ticket-header" id={props.color}></div>
                 <div className="seat-section">{props.seat}</div>
                 <form>
@@ -65,11 +76,19 @@ const BookTripTickets = (props) => {
                         <label for="total" className="form-label">Total: </label>
                         <NumberFormat name="total" readOnly value={props.tripInfo ? totalPrice : 'Calculating...'} thousandSeparator={true} prefix={'$'} />
                     </div>
+                    {!clickedBook ? 
                     <div className="d-flex justify-content-end">
-                        <button className="btn btn-success m-auto" onClick={handleFormSubmit}>Instant Purchase</button>
+                        <button className="btn btn-info m-auto" onClick={showConfirmBtn}>Book Trip</button>
+                    </div>
+                    :
+                    <>
+                    <div className="d-flex justify-content-end">
+                        <button className="btn btn-success m-auto" onClick={handleFormSubmit}>Confirm Purchase</button>
                     </div>
                     <div className="ticket-disclaimer">*Clicking the button above will charge your card on file immediately
                     </div>
+                    </>
+                    }
                 </form>
             </div>
         </div>

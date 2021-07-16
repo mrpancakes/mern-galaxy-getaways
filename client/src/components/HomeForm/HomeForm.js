@@ -35,7 +35,7 @@ const HomeForm = (props) => {
             <form className="container">
                 <div className="row">
                     <div className="col-12 col-lg-3">
-                    <label class="form-label">Destination</label>
+                    <label className="form-label">Destination</label>
                         <select className="form-select" aria-label="Default select" onChange={(e) => setDestination(e.target.value)}>
                             <option selected disabled>Where to?</option>
                             <option value="Jupiter">Jupiter</option>
@@ -49,7 +49,7 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                    <label class="form-label">Departure</label><br />
+                    <label className="form-label">Departure</label><br />
                         <DatePicker
                             locale="en-US"
                             onChange={setDepartureDate}
@@ -58,7 +58,7 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                    <label class="form-label">Return</label><br />
+                    <label className="form-label">Return</label><br />
                         <DatePicker
                             locale="en-US"
                             onChange={setReturnDate}
@@ -67,7 +67,7 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                    <label class="form-label">Passengers</label>
+                    <label className="form-label">Passengers</label>
                         <select className="form-select col" aria-label="Default select" onChange={(e) => setPassengers(e.target.value)}>
                             <option selected disabled>How many?</option>
                             <option>1</option>

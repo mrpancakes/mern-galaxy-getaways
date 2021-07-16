@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import NumberFormat from 'react-number-format';
-import moment from 'moment';
+import { useHistory } from "react-router-dom";
+// import NumberFormat from 'react-number-format';
+// import moment from 'moment';
 
+import MyTripsTickets from '../components/MyTripsTickets';
 import jupiterImg from '../images/jupiter.png'
 import API from '../utils/API'
 
+
 const MyTrips = () => {
+
+    const history = useHistory();
 
     const [userTrips, setUserTrips] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
-            const data = await API.getUserTrips();
-            // console.log(data.user.trips);
-            setUserTrips(data.user.trips);
-
+            if (localStorage.getItem('userToken')) {
+                const data = await API.getUserTrips();
+                setUserTrips(data.user.trips);
+            } else {
+                history.push('/login');
+            }
         }
         fetchData();
-
-    }, [])
+    }, []);
 
     const handleFormSubmit = async (tripId) => {
         // event.preventDefault();
@@ -31,61 +37,45 @@ const MyTrips = () => {
         }
     }
 
+    console.log(userTrips);
+
     return (
         <>
             <main className="container mb-5">
 
                 <header>
                     <h1 className="mb-3">My Trips</h1>
-                    <h6>All flights depart at 5:00pm local time at the launch center in Cape Canaveral, Florida.</h6>
-
                 </header>
 
+                {userTrips.length < 1 ? console.log('no trips') : console.log('yes trips')}
 
-                <section className="d-flex flex-wrap justify-content-around">
-                    {/* Map through all of a user's trips and create cards */}
-                    {userTrips.map(trip => (
-                        <div className="ticket" key={trip._id}>
-                            <div className="ticket-header" id="lunar-gray"></div>
-                            <div className="seat-section">Trip to {trip.destination}</div>
-                            <form>
-                                <div className="d-flex align-items-center">
-                                    <label for="spaceline" className="form-label">Spaceline: </label>
-                                    <input type="text" readOnly value={trip.spaceline} id="spaceline" />
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <label for="depart" className="form-label">Depart: </label>
-                                    <input type="text" readOnly value={moment(trip.departureDate).format('MM/DD/YYYY')} id="depart" />
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <label for="return" className="form-label">Return: </label>
-                                    <input type="text" readOnly value={moment(trip.returnDate).format('MM/DD/YYYY')} id="return" />
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <label for="section" className="form-label">Section: </label>
-                                    <input type="text" readOnly value={trip.section} id="section" />
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <label for="passengers" className="form-label">Passengers: </label>
-                                    <input type="text" readOnly value={trip.passengers} id="passengers" />
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <label for="pricePerTicket" className="form-label">Price/ticket: </label>    
-                                    <NumberFormat name="pricePerTicket" readOnly value={trip.pricePerTicket} thousandSeparator={true} prefix={'$'} />
-                                </div>
-                                <div className="d-flex align-items-center total-price">
-                                    <label for="total" className="form-label">Total: </label>                                    
-                                    <NumberFormat name="total" readOnly value={trip.total} thousandSeparator={true} prefix={'$'} />
-                                </div>
-                                <div className="d-flex justify-content-end">
-                                    <button type="button" className="btn btn-danger m-auto" onClick={() => handleFormSubmit(trip._id)}>Cancel Trip</button>
-                                </div>
-                                <div className="ticket-disclaimer">*Clicking the button above will cancel your trip immediately
-                            </div>
-                            </form>
-                        </div>
-                    ))}
-                </section>
+                {!userTrips.length > 0 ?
+                    <div className="text-center">
+                        <h4 className="mb-4">You have no trips booked! Whare are you waiting for?</h4>
+                        <a href="/"><button className="btn btn-success">BOOK A TRIP</button></a>
+                    </div>
+                    :
+                    <>
+                    <h6 className="text-center mb-5">All flights depart at 5:00pm local time at the launch center in Cape Canaveral, Florida.</h6>
+                    <section className="d-flex flex-wrap justify-content-around">
+                        {/* Map through all of a user's trips and create cards */}
+                        {userTrips.map(trip => (
+                            <MyTripsTickets
+                                key={trip._id}
+                                tripId={trip._id}
+                                destination={trip.destination}
+                                spaceline={trip.spaceline}
+                                departureDate={trip.departureDate}
+                                section={trip.section}
+                                passengers={trip.passengers}
+                                pricePerTicket={trip.pricePerTicket}
+                                total={trip.total}
+                                deleteTrip={handleFormSubmit}
+                            />
+                        ))}
+                    </section>
+                    </>
+                }
 
             </main>
 
