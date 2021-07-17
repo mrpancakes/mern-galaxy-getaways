@@ -143,9 +143,21 @@ footer {
   justify-content: flex-end;
 }
 
-.ticket {
+.bookTicket {
   max-width: 300px;
-  /* height: 100%; */
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+  /* margin-bottom: 15px; */
+  box-shadow: 30px 20px 50px rgba(150, 150, 150, 0.19), 0 10px 10px rgba(131, 131, 131, 0.23);
+}
+
+.myTicket {
+  max-width: 300px;
+  height: 100%;
   background-color: white;
   color: black;
   font-size: 1rem;
@@ -161,18 +173,21 @@ footer {
   font-weight: bolder !important;
 }
 
-.ticket > form input {
+.bookTicket > form input,
+.myTicket > form input {
   border: none;
   margin-left: 10px;
   background-color: transparent;
   width: 100%;
 }
 
-.ticket > form div {
+.bookTicket > form div,
+.myTicket > form div {
   margin-bottom: 20px;
 }
 
-.ticket > form {
+.bookTicket > form,
+.myTicket > form {
   margin-left: 15px;
   margin-top: 40px;
 }

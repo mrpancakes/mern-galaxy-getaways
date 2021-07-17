@@ -44,7 +44,7 @@ const BookTripTickets = (props) => {
 
     return (
         <div className="mb-5">
-            <div className="ticket mb-5">
+            <div className="bookTicket mb-5">
                 <div className="ticket-header" id={props.color}></div>
                 <div className="seat-section">{props.seat}</div>
                 <form>

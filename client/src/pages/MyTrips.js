@@ -27,9 +27,7 @@ const MyTrips = () => {
     }, []);
 
     const handleFormSubmit = async (tripId) => {
-        // event.preventDefault();
         try {
-            console.log(tripId);
             const data = await API.deleteTrip(tripId);
             setUserTrips(data.user.trips);
         } catch (err) {
