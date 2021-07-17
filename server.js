@@ -25,7 +25,12 @@ if (process.env.NODE_ENV === "production") {
 // Define any API routes before this runs
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/galaxyGetaways", { useFindAndModify: false });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/galaxyGetaways", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
