@@ -1,6 +1,6 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Trips = require('../../models/trips');
 const Users = require('../../models/users')
@@ -11,13 +11,38 @@ const mongoose = require("mongoose");
 // GET: All of a users trips on http://localhost:3000/my-trips
 // DELETE: Removing a user's trips when the click the cancel button on http://localhost:3000/my-trips
 router.post('/sign-up', async (req, res) => {
-    console.log(req.body)
+    
     try {
-        const createUser = await Users.create(req.body)
+        console.log('This is req.body', req.body)
+
+        const salt = await bcrypt.genSalt(10);
+        const userPassword = await bcrypt.hash(req.body.password, salt);
+        const userCreditCard = await bcrypt.hash(req.body.creditCard, salt);
+
+        console.log(userPassword, userCreditCard);
+
+        const user = new Users({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            street: req.body.street,
+            city: req.body.city,
+            state: req.body.state,
+            zip: req.body.zip,
+            email: req.body.email,
+            password: userPassword,
+            creditCard: userCreditCard,
+        });
+        
+        // const createUser = await Users.create(user);
+        console.log(user);
+        await user.save();
+
+        
+
         jwt.sign({
             user: {
-                email: createUser.email,
-                _id: createUser._id,
+                email: user.email,
+                _id: user._id,
             }
         },
             "SSEMNG$51423", {
@@ -31,6 +56,7 @@ router.post('/sign-up', async (req, res) => {
             }
         )
     } catch (error) {
+        console.log(error)
         res.send(error)
     }
 })
