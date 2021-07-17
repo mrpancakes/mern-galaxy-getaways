@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('../../models/users');
 const secret = "SSEMNG$51423";
@@ -34,7 +34,7 @@ router.get('/', auth, async (req, res) => {
 router.post('/login', async (req, res) => {
     console.log("login body:", req.body)
     try {
-        const login = await Users.find({
+        const login = await Users.findOne({
             email: req.body.email,
         });
         if (!login) {
@@ -44,21 +44,14 @@ router.post('/login', async (req, res) => {
                 }]
             });
         }
-        console.log("login", login[0])
-        if (req.body.token) {
+        console.log("login", login)
 
-            const verifyToken = jwt.verify(req.body.token, "SSEMNG$51423", { maxAge: 360000 })
-            const { data } = verifyToken
-            console.log(data);
+        console.log('Header: ', req.headers);
 
-            if (login) {
-                return res.json({
-                    msg: "success!"
-                })
-            }
-        } else {
-            const isMatch = (req.body.password === login[0].password)
-            // const isMatch = await bcrypt.compare(req.body.password, login.password);
+        
+            console.log('ran else');
+            // const isMatch = (req.body.password === login.password)
+            const isMatch = await bcrypt.compare(req.body.password, login.password);
             // If isMatch is false error out as the password is incorrect
             if (!isMatch) {
                 console.log('req body password and the log password dont match')
@@ -73,8 +66,8 @@ router.post('/login', async (req, res) => {
             jwt.sign(
                 {
                     user: {
-                        email: login[0].email,
-                        _id: login[0]._id,
+                        email: login.email,
+                        _id: login._id,
                     }
                 },
                 secret,
@@ -82,7 +75,7 @@ router.post('/login', async (req, res) => {
             );
             console.log(retToken);
             res.json({token: retToken}) 
-        }
+        
     }
     catch (error) {
         res.json(error)
