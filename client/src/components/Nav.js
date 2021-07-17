@@ -18,7 +18,7 @@ const Nav = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('userToken');
-        history.go(0);
+        history.push('/login');
     }
 
     return (

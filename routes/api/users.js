@@ -6,6 +6,7 @@ const Trips = require('../../models/trips');
 const Users = require('../../models/users')
 const auth = require('../../middleware/auth');
 const mongoose = require("mongoose");
+// const secret = ;
 
 // POST: Create new trip from http://localhost:3000/book-trip
 // GET: All of a users trips on http://localhost:3000/my-trips
@@ -45,7 +46,7 @@ router.post('/sign-up', async (req, res) => {
                 _id: user._id,
             }
         },
-            "SSEMNG$51423", {
+        process.env.JWT_SECRET, {
             expiresIn: 360000
         },
             (err, token) => {

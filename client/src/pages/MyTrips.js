@@ -49,7 +49,7 @@ const MyTrips = () => {
 
                 {!userTrips.length > 0 ?
                     <div className="text-center">
-                        <h4 className="mb-4">You have no trips booked! Whare are you waiting for?</h4>
+                        <h4 className="mb-4">You have no trips booked! What are you waiting for?</h4>
                         <a href="/"><button className="btn btn-success">BOOK A TRIP</button></a>
                     </div>
                     :
