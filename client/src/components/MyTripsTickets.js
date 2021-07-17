@@ -13,7 +13,7 @@ const MyTripsTickets = (props) => {
     }
 
     return (
-        <div className="ticket mb-3">
+        <div className="myTicket mb-3">
             <div className="ticket-header" id="lunar-gray"></div>
             <div className="seat-section">Trip to {props.destination}</div>
             <form>
