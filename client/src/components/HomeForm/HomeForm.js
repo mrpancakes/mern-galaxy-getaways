@@ -7,8 +7,8 @@ import TripContext from "../../utils/TripContext.js"
 const HomeForm = (props) => {
     console.log(props);
     let history = useHistory();
-    
-    const {tripInfo, setTripInfo} = useContext(TripContext);
+
+    const { tripInfo, setTripInfo } = useContext(TripContext);
 
     const updateTripValues = (e) => {
         e.preventDefault();
@@ -30,12 +30,15 @@ const HomeForm = (props) => {
     const [returnDate, setReturnDate] = useState(new Date());
     const [passengers, setPassengers] = useState(0);
 
+    // let minReturnDate = new Date();
+    // minReturnDate.setDate(minReturnDate.getDate() + 10)
+
     return (
         <>
             <form className="container">
                 <div className="row">
                     <div className="col-12 col-lg-3">
-                    <label className="form-label">Destination</label>
+                        <label className="form-label">Destination</label>
                         <select className="form-select" aria-label="Default select" onChange={(e) => setDestination(e.target.value)}>
                             <option selected disabled>Where to?</option>
                             <option value="Jupiter">Jupiter</option>
@@ -49,8 +52,9 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                    <label className="form-label">Departure</label><br />
+                        <label className="form-label">Departure</label><br />
                         <DatePicker
+                            minDate={new Date()}
                             locale="en-US"
                             onChange={setDepartureDate}
                             value={departureDate}
@@ -58,8 +62,9 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                    <label className="form-label">Return</label><br />
+                        <label className="form-label">Return</label><br />
                         <DatePicker
+                            minDate={new Date()}
                             locale="en-US"
                             onChange={setReturnDate}
                             value={returnDate}
@@ -67,7 +72,7 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                    <label className="form-label">Passengers</label>
+                        <label className="form-label">Passengers</label>
                         <select className="form-select col" aria-label="Default select" onChange={(e) => setPassengers(e.target.value)}>
                             <option selected disabled>How many?</option>
                             <option>1</option>
