@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('../../models/users');
-const secret = "SSEMNG$51423";
+// const secret = process.env.JWT_SECRET;
 // Destructuring out the functions from express-validator
 const {
     check,
@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
                         _id: login._id,
                     }
                 },
-                secret,
+                process.env.JWT_SECRET,
                 { expiresIn: '2h' }
             );
             console.log(retToken);
