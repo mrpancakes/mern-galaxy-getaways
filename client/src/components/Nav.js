@@ -8,16 +8,19 @@ const Nav = () => {
 
     let history = useHistory();
 
-    // const { token, setToken } = useContext(TripContext);
+    const { loggedIn, setLoggedIn } = useContext(TripContext);
 
-    const [userToken, setUserToken] = useState(null);
+    // const [userToken, setUserToken] = useState(null);
 
     useEffect(() => {
-        setUserToken(localStorage.getItem('userToken'));
-    })
+        if (localStorage.getItem('userToken')) {
+            setLoggedIn(true);
+        }
+    }, [loggedIn])
 
     const handleLogout = () => {
         localStorage.removeItem('userToken');
+        setLoggedIn(false)
         history.push('/login');
     }
 
@@ -36,13 +39,16 @@ const Nav = () => {
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="/about">About</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/my-trips">My Trips</a>
-                        </li>
-                        {userToken ?
-                            <li className="nav-item">
-                                <a className="nav-link" id="logout" onClick={handleLogout}>Logout</a>
-                            </li>
+                        {loggedIn ?
+                            <>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/my-trips">My Trips</a>
+                                </li>
+
+                                <li className="nav-item">
+                                    <a className="nav-link" id="logout" onClick={handleLogout}>Logout</a>
+                                </li>
+                            </>
                             :
                             <li className="nav-item">
                                 <a className="nav-link" href="/login">Login</a>

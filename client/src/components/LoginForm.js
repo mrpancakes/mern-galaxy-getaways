@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
-
+import TripContext from '../utils/TripContext'
 import API from '../utils/API'
 
 const LoginForm = () => {
 
     const history = useHistory();
+
+    const { setLoggedIn } = useContext(TripContext);
 
     const [loginInfo, setLoginInfo] = useState({})
 
@@ -22,7 +24,8 @@ const LoginForm = () => {
                 password: loginInfo.password,
             })
             localStorage.setItem('userToken', token);
-                history.push('/');
+            setLoggedIn(true);
+            history.push('/');
         } catch(err) {
             console.log(err)
         }
