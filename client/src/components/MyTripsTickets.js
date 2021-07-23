@@ -17,6 +17,7 @@ const MyTripsTickets = (props) => {
             <div className="ticket-header" id="lunar-gray"></div>
             <div className="seat-section">Trip to {props.destination}</div>
             <form>
+                <div className="form-fields">
                 <div className="d-flex align-items-center">
                     <label htmlFor="spaceline" className="form-label">Spaceline: </label>
                     <input type="text" readOnly value={props.spaceline} id="spaceline" />
@@ -44,6 +45,7 @@ const MyTripsTickets = (props) => {
                 <div className="d-flex align-items-center total-price">
                     <label htmlFor="total" className="form-label">Total: </label>
                     <NumberFormat name="total" readOnly value={props.total} thousandSeparator={true} prefix={'$'} />
+                </div>
                 </div>
 
                 {!clickedCancel ? 

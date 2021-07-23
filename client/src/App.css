@@ -186,11 +186,15 @@ footer {
   margin-bottom: 20px;
 }
 
-.bookTicket > form,
-.myTicket > form {
+.form-fields {
   margin-left: 15px;
   margin-top: 40px;
 }
+
+/* .bookTicket > form > div > button,
+.myTicket > form > div > button{
+  margin-right: 40px !important;
+} */
 
 .seat-section {
   text-align: center;
@@ -218,7 +222,6 @@ footer {
 .ticket-disclaimer {
   font-size: 0.8rem;
   text-align: center;
-  margin-left: -15px !important;
 }
 
 #logout {
