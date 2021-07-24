@@ -6,11 +6,7 @@ const Trips = require('../../models/trips');
 const Users = require('../../models/users')
 const auth = require('../../middleware/auth');
 const mongoose = require("mongoose");
-// const secret = ;
 
-// POST: Create new trip from http://localhost:3000/book-trip
-// GET: All of a users trips on http://localhost:3000/my-trips
-// DELETE: Removing a user's trips when the click the cancel button on http://localhost:3000/my-trips
 router.post('/sign-up', async (req, res) => {
     
     try {
@@ -37,8 +33,6 @@ router.post('/sign-up', async (req, res) => {
         // const createUser = await Users.create(user);
         console.log(user);
         await user.save();
-
-        
 
         jwt.sign({
             user: {

@@ -37,9 +37,9 @@ const HomeForm = (props) => {
         <>
             <form className="container">
                 <div className="row">
-                    <div className="col-12 col-lg-3">
+                    <div className="col-12 col-lg-3 ">
                         <label className="form-label">Destination</label>
-                        <select className="form-select" aria-label="Default select" onChange={(e) => setDestination(e.target.value)}>
+                        <select className="form-select dropdown" aria-label="Default select" onChange={(e) => setDestination(e.target.value)}>
                             <option selected disabled>Where to?</option>
                             <option value="Jupiter">Jupiter</option>
                             <option value="Mars">Mars</option>
@@ -52,7 +52,7 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                        <label className="form-label">Departure</label><br />
+                        <label className="form-label datePicker">Departure</label><br />
                         <DatePicker
                             minDate={new Date()}
                             locale="en-US"
@@ -62,7 +62,7 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-3">
-                        <label className="form-label">Return</label><br />
+                        <label className="form-label datePicker">Return</label><br />
                         <DatePicker
                             minDate={new Date()}
                             locale="en-US"
@@ -73,7 +73,7 @@ const HomeForm = (props) => {
 
                     <div className="col-12 col-lg-3">
                         <label className="form-label">Passengers</label>
-                        <select className="form-select col" aria-label="Default select" onChange={(e) => setPassengers(e.target.value)}>
+                        <select className="form-select col dropdown" aria-label="Default select" onChange={(e) => setPassengers(e.target.value)}>
                             <option selected disabled>How many?</option>
                             <option>1</option>
                             <option>2</option>
@@ -84,7 +84,7 @@ const HomeForm = (props) => {
                     </div>
 
                     <div className="search-flights-btn">
-                        <button className="btn btn-dark" onClick={(e) => updateTripValues(e)}>Search Flights<i className="fas fa-arrow-right"></i></button>
+                        <button className="btn btn-dark" onClick={(e) => updateTripValues(e)}>Search Flights  <i className="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
             </form>
