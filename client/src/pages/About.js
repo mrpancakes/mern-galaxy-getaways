@@ -6,7 +6,7 @@ import earthImg from '../images/earth.png'
 const About = () => {
     return (
         <>
-            <main className="container d-flex flex-column align-items-center justify-content-center">
+            <main className="container d-flex flex-column align-items-center justify-content-center mb-5">
                 <header>
                     <h1 className="">Welcome to Galaxy Getaways!</h1>
                 </header>
