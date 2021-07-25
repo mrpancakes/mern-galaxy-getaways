@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
 import NumberFormat from 'react-number-format';
 import moment from 'moment';
-import API from '../utils/API';
 
 const MyTripsTickets = (props) => {
 
     const [clickedCancel, setClickedCancel] = useState(false);
-    const [userTrips, setUserTrips] = useState([]);
 
     const showCancelBtn = () => {
         setClickedCancel(true);
     }
 
     return (
-        <div className="myTicket mb-3">
+        <div className="myTicket m-md-3 mb-3">
             <div className="ticket-header" id="lunar-gray"></div>
             <div className="seat-section">Trip to {props.destination}</div>
             <form>

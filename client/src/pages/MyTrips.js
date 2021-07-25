@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
-// import NumberFormat from 'react-number-format';
-// import moment from 'moment';
 
 import MyTripsTickets from '../components/MyTripsTickets';
 import jupiterImg from '../images/jupiter.png'
@@ -55,7 +53,7 @@ const MyTrips = () => {
                     :
                     <>
                     <h6 className="text-center mb-5">All flights depart at 5:00pm local time at the launch center in Cape Canaveral, Florida.</h6>
-                    <section className="d-flex flex-wrap justify-content-around">
+                    <section className="d-flex flex-wrap justify-content-center">
                         {/* Map through all of a user's trips and create cards */}
                         {userTrips.map(trip => (
                             <MyTripsTickets
@@ -64,6 +62,7 @@ const MyTrips = () => {
                                 destination={trip.destination}
                                 spaceline={trip.spaceline}
                                 departureDate={trip.departureDate}
+                                returnDate={trip.returnDate}
                                 section={trip.section}
                                 passengers={trip.passengers}
                                 pricePerTicket={trip.pricePerTicket}
