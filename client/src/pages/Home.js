@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles'
-import HomeForm from '../components/HomeForm/HomeForm'
-import marsImg from '../images/marsglobe.png'
+import { withStyles } from '@material-ui/core/styles';
+import HomeForm from '../components/HomeForm/HomeForm';
+import marsImg from '../images/marsglobe.png';
+import TripContext from '../utils/TripContext'
 
 const Home = () => {
 
@@ -22,19 +23,15 @@ const Home = () => {
         },
       })(Button);
 
-    const [token, setToken] = useState(null);
-
-    useEffect(() => {
-      setToken(localStorage.getItem('userToken'));
-    },[])
+    const { loggedIn } = useContext(TripContext);
 
     console.log(token);
 
     return (
         <>
-            <main className={`container ${!token ? "text-center" : ""}`}>
+            <main className={`container ${!loggedIn ? "text-center" : ""}`}>
                 <h1>Where is your next adventure?</h1>
-                {!token ? 
+                {!loggedIn ? 
                 <>
                 <h5 className="mb-5">Must be logged in to book a trip</h5>
                 <StyledButton href="/login">Login/Signup</StyledButton>
