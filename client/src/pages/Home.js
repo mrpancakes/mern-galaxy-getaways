@@ -22,8 +22,6 @@ const Home = () => {
         },
       })(Button);
 
-    // Need state and conditionals to show/hide form if user is logged in
-
     const [token, setToken] = useState(null);
 
     useEffect(() => {
@@ -34,7 +32,7 @@ const Home = () => {
 
     return (
         <>
-            <main className="container">
+            <main className={`container ${!token ? "text-center" : ""}`}>
                 <h1>Where is your next adventure?</h1>
                 {!token ? 
                 <>
