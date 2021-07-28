@@ -25,8 +25,6 @@ const Home = () => {
 
     const { loggedIn } = useContext(TripContext);
 
-    console.log(token);
-
     return (
         <>
             <main className={`container ${!loggedIn ? "text-center" : ""}`}>
