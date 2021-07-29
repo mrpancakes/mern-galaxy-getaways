@@ -14,7 +14,7 @@ const BookTripTickets = (props) => {
     const { tripInfo, setTripInfo } = useContext(TripContext);
 
     const passengerCount = props.tripInfo.passengers
-    const formattedDepartDate = moment(props.tripInfo.departDate).format('MM/DD/YYYY');
+    const formattedDepartureDate = moment(props.tripInfo.departureDate).format('MM/DD/YYYY');
     const formattedReturnDate = moment(props.tripInfo.returnDate).format('MM/DD/YYYY');
     const totalPrice = props.ticketPrice * passengerCount;
 
@@ -55,7 +55,7 @@ const BookTripTickets = (props) => {
                         </div>
                         <div className="d-flex align-items-center">
                             <label for="depart" className="form-label">Depart: </label>
-                            <input type="text" name="departureDate" readOnly value={props.tripInfo ? formattedDepartDate : 0} id="depart" />
+                            <input type="text" name="departureDate" readOnly value={props.tripInfo ? formattedDepartureDate : 0} id="depart" />
                         </div>
                         <div className="d-flex align-items-center">
                             <label for="return" className="form-label">Return: </label>
